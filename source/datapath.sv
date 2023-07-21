@@ -14,6 +14,7 @@ module datapath (
 
     // CTRL OUTPUTS
     output logic Z, 
+    output logic[5:0] op_code,
 
     // MEM INPUTS
     input logic[31:0] ID, // instruc mem data
@@ -33,7 +34,6 @@ localparam XAdr  = 32'h80000008; // during interrupts
 
 // deocding
 logic[4:0] Ra, Rb, Rc; 
-logic[5:0] op_code; 
 logic[31:0] SXT_C ; // sign extended constant in op code
 
 
