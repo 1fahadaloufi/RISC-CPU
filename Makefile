@@ -12,11 +12,15 @@
 
 # Specify the name of the top level file (do not include the source folder in the name)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
-TOP_FILE         := alu/cla/cla.sv
+TOP_FILE         := datapath.sv
+#register_file/register_file.sv
+#alu/alu.sv
 
 # List internal component/block files here (separate the filenames with spaces)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
-COMPONENT_FILES  := alu/cla/gp_block.sv alu/cla/unit_adder.sv alu/cla/ripple_carry.sv
+COMPONENT_FILES  := 
+#register_file/le_reg.sv
+#alu/cla/cla.sv alu/cla/gp_block.sv alu/cla/unit_adder.sv alu/shifter/shifter.sv alu/arith.sv alu/bool_func.sv alu/cmp.sv 
 
 # Specify the filepath of the test bench you want to use (ie. tb_top_level.sv)
 # (do not include the source folder in the name)
@@ -111,6 +115,7 @@ clean:
 	@rm -rf $(MAP)/*
 	@rm -f *.log
 	@rm -f *.show
+	@rm -f *.vcd
 	@echo "Done\n\n"
 
 print_vars:

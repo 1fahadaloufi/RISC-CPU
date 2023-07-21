@@ -2,7 +2,7 @@
 module cla(
     input logic[31:0] A, B, 
     input logic Cin, 
-    output logic[31:0] S, S2, S3
+    output logic[31:0] S
 );
 
 // generate signals
