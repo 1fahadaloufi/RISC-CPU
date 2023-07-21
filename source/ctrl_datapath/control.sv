@@ -51,6 +51,20 @@ always_comb begin
     end 
     else begin
         case(op_code)
+
+            // NO-OP 
+            6'h0: begin
+                ASEL = 1'b0;
+                BSEL = 1'b0;
+                MOE = 1'b0; 
+                MWR = 1'b0; 
+                PCSEL = 3'b00; 
+                RA2SEL = 1'b0; 
+                WASEL = 1'b0; 
+                WDSEL = 2'b00;
+                WERF = 1'b0; 
+                ALUFN = AFN; 
+            end 
             //------ ALU Ops ---------
             
             //add 
@@ -120,7 +134,7 @@ always_comb begin
                 WASEL = 1'b0; 
                 WDSEL = 2'b01;
                 WERF = 1'b1; 
-                ALUFN = CMPLTE; 
+                ALUFN = CMPLE; 
             end
 
             // CMPLT
@@ -290,7 +304,7 @@ always_comb begin
                 WASEL = 1'b0; 
                 WDSEL = 2'b01;
                 WERF = 1'b1; 
-                ALUFN = CMPLTE; 
+                ALUFN = CMPLE; 
             end
 
             // CMPLTC

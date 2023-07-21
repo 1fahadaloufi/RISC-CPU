@@ -10,12 +10,17 @@ module register_file(
 logic[31:0] WA_dec; 
 logic[31:0] reg_outputs[31:0]; 
 
+
 genvar i; 
 generate 
     for(i = 0; i < 31; i += 1)
         le_reg REGX(.clk(clk), .n_rst(n_rst), .load_en(WE & WA_dec[i]), .load_data(WD), .data_out(reg_outputs[i])); 
 endgenerate 
 
+// always_comb begin: REG_OUTPUT_LOGIC
+//     for(integer k = 0; k < 32; k += 1)
+//         reg_outputs[k] = 'b0;
+// end
 
 always_comb begin: READING_REGISTERS
     RD1 = 'b0; 

@@ -1,6 +1,6 @@
 module cpu (
     input logic clk, n_rst,
-    input logic RESET, IRQ
+    input logic RESET, IRQ,
 
     // MEM INPUTS
     input logic[31:0] ID, // instruc mem data
@@ -58,10 +58,10 @@ datapath DATAPATH(
     .RA2SEL(RA2SEL),
     .WASEL(WASEL),
     .WDSEL(WDSEL),
-    .WERF(WERF)
+    .WERF(WERF),
 
     // CTRL OUTPUTS
-    .Z(Z) 
+    .Z(Z),
     .op_code(op_code),
 
     // MEM INPUTS
@@ -72,15 +72,9 @@ datapath DATAPATH(
     // MEM OUTPUTS
     .IA(IA), // instruc address (word alinged - 4B)
     .MWD(MWD), // mem write data
-    .MA(MA),
+    .MA(MA)
 );
 
-
-
-
-
-
-
-
-
 endmodule 
+
+

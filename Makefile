@@ -12,15 +12,14 @@
 
 # Specify the name of the top level file (do not include the source folder in the name)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
-TOP_FILE         := datapath.sv
+TOP_FILE         := cpu.sv
+#datapath.sv
 #register_file/register_file.sv
 #alu/alu.sv
 
 # List internal component/block files here (separate the filenames with spaces)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
-COMPONENT_FILES  := 
-#register_file/le_reg.sv
-#alu/cla/cla.sv alu/cla/gp_block.sv alu/cla/unit_adder.sv alu/shifter/shifter.sv alu/arith.sv alu/bool_func.sv alu/cmp.sv 
+COMPONENT_FILES  := ctrl_datapath/datapath.sv ctrl_datapath/control.sv register_file/le_reg.sv register_file/register_file.sv alu/alu.sv alu/cla/cla.sv alu/cla/gp_block.sv alu/cla/unit_adder.sv alu/shifter/shifter.sv alu/arith.sv alu/bool_func.sv alu/cmp.sv 
 
 # Specify the filepath of the test bench you want to use (ie. tb_top_level.sv)
 # (do not include the source folder in the name)

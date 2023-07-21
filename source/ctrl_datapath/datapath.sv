@@ -9,7 +9,7 @@ module datapath (
     input logic[2:0] PCSEL, 
     input logic RA2SEL,
     input logic WASEL,
-    input logic[1:0] WDSEL 
+    input logic[1:0] WDSEL,
     input logic WERF,
 
     // CTRL OUTPUTS
@@ -24,8 +24,7 @@ module datapath (
     // MEM OUTPUTS
     output logic[31:0] IA, // instruc address (word alinged - 4B)
     output logic[31:0] MWD, // mem write data
-    output logic[31:0] MA,
-
+    output logic[31:0] MA
 );
 
 localparam Reset = 32'h80000000; // address to go to during reset
@@ -34,6 +33,7 @@ localparam XAdr  = 32'h80000008; // during interrupts
 
 // deocding
 logic[4:0] Ra, Rb, Rc; 
+logic[15:0] C; 
 logic[31:0] SXT_C ; // sign extended constant in op code
 
 
@@ -54,7 +54,7 @@ logic[31:0] Y;
 
 
 // Decoding Instruction
-assign Ra = ID[20:16]
+assign Ra = ID[20:16];
 assign op_code = ID[31:26];
 assign Rb = ID[15:11];
 assign Rc = ID[25:21]; 
@@ -69,6 +69,7 @@ assign pc_incr = pc + 4;
 assign pc_offset = pc + 4 + (SXT_C << 2); 
 assign JT = {pc[31] & RD1[31], RD1[30:2], 2'b00}; 
 
+assign IA = pc; 
 always_ff @(posedge clk, negedge n_rst) begin
     if(~n_rst)
         pc <= 'b0; 
@@ -78,7 +79,7 @@ always_ff @(posedge clk, negedge n_rst) begin
         else begin
             case(PCSEL)
                 3'd0: pc <= {pc[31], pc_incr[30:0]}; 
-                3'd1: pc <= {pc[31], pc_offset[30:0]}
+                3'd1: pc <= {pc[31], pc_offset[30:0]};
                 3'd2: pc <= JT;
                 3'd3: pc <= Illop; 
                 3'd4: pc <= XAdr; 
@@ -89,14 +90,14 @@ end
 
 
 // Register File Logic
-register_file REG_FILE(.RA1(RA1), .RA2(RA2), .WA(WA), .WD(WD),
+register_file REG_FILE(.clk(clk), .n_rst(n_rst), .RA1(RA1), .RA2(RA2), .WA(WA), .WD(WD),
                        .RD1(RD1), .RD2(RD2), .WE(WERF)); 
 assign RA1 = Ra; 
 assign RA2 = RA2SEL ? Rc : Rb; 
 assign WA = WASEL ? 5'd30 : Rc; 
 assign WD = WDSEL == 2'd2 ? MRD :
             (WDSEL == 2'd1 ? Y :
-            (WDSEL == 2'd0 ? pc + 32'd4 : 'b0 ) )
+            (WDSEL == 2'd0 ? pc + 32'd4 : 'b0 ) ); 
 
 assign Z = ~(|RD1); 
 assign MWD = RD2; 
