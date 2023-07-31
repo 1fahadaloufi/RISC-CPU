@@ -13,17 +13,26 @@
 # Specify the name of the top level file (do not include the source folder in the name)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
 TOP_FILE         := cpu.sv
+#pipeline_stages/WB.sv
+#pipeline_stages/ALU.sv
+#pipeline_stages/RF.sv
+#pipeline_stages/IF.sv
+#cpu.sv
 #datapath.sv
 #register_file/register_file.sv
 #alu/alu.sv
 
 # List internal component/block files here (separate the filenames with spaces)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
-COMPONENT_FILES  := ctrl_datapath/datapath.sv ctrl_datapath/control.sv register_file/le_reg.sv register_file/register_file.sv alu/alu.sv alu/cla/cla.sv alu/cla/gp_block.sv alu/cla/unit_adder.sv alu/shifter/shifter.sv alu/arith.sv alu/bool_func.sv alu/cmp.sv 
+COMPONENT_FILES  := pipeline_stages/WB.sv pipeline_stages/MEM.sv pipeline_stages/RF.sv pipeline_stages/IF.sv pipeline_stages/control.sv pipeline_stages/ALU.sv alu/alu.sv alu/cla/cla.sv alu/cla/gp_block.sv alu/cla/unit_adder.sv alu/shifter/shifter.sv alu/arith.sv alu/bool_func.sv alu/cmp.sv register_file/le_reg.sv register_file/register_file.sv
+#pipeline_stages/control.sv
+#pipeline_stages/control.sv alu/alu.sv alu/cla/cla.sv alu/cla/gp_block.sv alu/cla/unit_adder.sv alu/shifter/shifter.sv alu/arith.sv alu/bool_func.sv alu/cmp.sv 
+#ctrl_datapath/datapath.sv ctrl_datapath/control.sv register_file/le_reg.sv register_file/register_file.sv alu/alu.sv alu/cla/cla.sv alu/cla/gp_block.sv alu/cla/unit_adder.sv alu/shifter/shifter.sv alu/arith.sv alu/bool_func.sv alu/cmp.sv 
 
 # Specify the filepath of the test bench you want to use (ie. tb_top_level.sv)
 # (do not include the source folder in the name)
-TB               := $(dir $(TOP_FILE))tb_$(notdir $(TOP_FILE))
+TB               := tb_cpu.sv
+#$(dir $(TOP_FILE))tb_$(notdir $(TOP_FILE))
 
 # Get the top level design and test_bench module names
 TB_MODULE		 := $(notdir $(basename $(TB)))
@@ -32,8 +41,8 @@ TOP_MODULE	     := $(notdir $(basename $(TOP_FILE)))
 # Simulation
 
 # Directries where the source and mapped code is located
-SRC              := source
-MAP              := mapped
+SRC              := pipelined
+MAP              := pipelined/mapped
 
 WF			     := waves.gtkw
 
