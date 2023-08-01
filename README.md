@@ -1,11 +1,11 @@
 # RISC-CPU
 
 ## About
-This respository includes SystemVerilog code for both a single cycle RISC processor as well as a 5-stage pipelined version. 
+This repository includes SystemVerilog code for a single-cycle RISC processor and a 5-stage pipelined version. 
 
-Both CPU designs have an accompanying testbench thats runs the bubble sort algorithm on an array loaded in memory.  
+Both CPU designs have an accompanying testbench that runs the bubble sort algorithm on an array loaded in memory.  
 
-Both source and mapped simulations were run to verify both of the designs, and the mapped verilog code was synthesized using an open source 45 nm cell library. 
+Both source and mapped simulations were run to verify both designs, and the mapped verilog code was synthesized using an open-source 45 nm cell library. 
 
 
 ## Tools
